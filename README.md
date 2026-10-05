@@ -110,8 +110,11 @@ jac run --dev mobile     # terminal 2 (the first run sets up an Expo project)
 ```
 
 Scan the QR code with the Expo Go app (phone on the same Wi-Fi), or press `a` / `i` for
-an Android emulator or iOS simulator. I mostly tested the browser version; I didn't
-test on a physical device.
+an Android emulator or iOS simulator.
+
+You can also open the browser version on a real phone. With the two-terminal setup above
+running and the phone on the same Wi-Fi, go to `http://<your-laptop's-IP>:8100` (on a
+Mac, `ipconfig getifaddr en0` prints the IP). I tested the mobile app on my iPhone 15.
 
 <img src="docs/mobile.png" alt="Mobile app" width="300">
 
