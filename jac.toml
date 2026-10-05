@@ -1,0 +1,52 @@
+[project]
+name = "stunny"
+description = "Stunny: a time-block study planner with a web app, mobile app and CLI over one Jac server."
+default-app = "web"
+jac-version = "==0.37.23"
+
+# ---------------------------------------------------------------------------
+# Apps. One shared backend (`planner`) and three clients over it.
+# ---------------------------------------------------------------------------
+
+# The backend: every endpoint and all persisted planner data live here.
+[apps.planner]
+kind = "service"
+entry-point = "core.planner"
+
+# Browser UI. `jac run` serves this app and colocates the planner service.
+[apps.web]
+kind = "web-app"
+entry-point = "web.main"
+
+# React Native (mobUI) app, bridges to the planner service over HTTP.
+[apps.mobile]
+kind = "mobile"
+entry-point = "mobile.main"
+
+# Terminal client, bridges to the planner service over HTTP.
+[apps.cli]
+kind = "cli"
+entry-point = "cli.main"
+
+[apps.cli.check]
+[apps.cli.check.lint]
+ignore = ["no-print"]
+
+[test]
+directories = ["core", "cli"]
+
+[dependencies]
+[dependencies.npm]
+react-native-web = "^0.21.2"
+"@tailwindcss/vite" = "^4.1.17"
+tailwindcss = "^4.1.17"
+
+[client]
+[client.vite]
+plugins = ["tailwindcss()"]
+lib_imports = ["import tailwindcss from '@tailwindcss/vite'"]
+
+[client.app_meta_data]
+title = "Stunny - Study Planner"
+description = "A time-block study planner with a built-in study timer."
+theme_color = "#fbcfe8"
